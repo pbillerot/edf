@@ -1,6 +1,6 @@
 <?php
 /*
- * Editeur De Fichiers PHP b1
+ * Editeur De Fichiers PHP master
  */
 $contents = "";
 $filename = "";
