@@ -1,5 +1,5 @@
 <?php
-
+// c'est pas grand chose mais ça marche
 $file = $_GET['filename'];
 
 header ("Content-Type: application/octet-stream");
