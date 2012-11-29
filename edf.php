@@ -1,10 +1,6 @@
 <?php
 /*
-<<<<<<< HEAD
  * Editeur De Fichiers PHP sur edf2
-=======
- * Editeur De Fichiers PHP master v0
->>>>>>> 6594e12f7ba1619f768a59b957a11f130db4d25e
  */
 $contents = "";
 $filename = "";
