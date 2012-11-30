@@ -85,10 +85,9 @@ if ( $filename != "" ) {
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="-1" />
 <meta http-equiv='pragma' content='no-cache' />
-<meta name="publisher" content="La Webisserie du Poitou" />
-<meta name="copyright" content="philippe.billerot@gmail.com" />
+<meta name="publisher" content="Eclipse-php sous Xubuntu" />
+<meta name="copyright" content="<?php echo constant("COPYRIGHT"); ?>" />
 <meta name="description" content="EDITEUR PHP" />
-<link href="bootstrap/css/boottheme.css" rel="stylesheet">
 <!-- Le styles -->
 <link href="bootstrap/css/boottheme.css" rel="stylesheet">
 <body>
@@ -98,10 +97,15 @@ if ( $filename != "" ) {
 			<div class="span12">
 				<div class="navbar-form well well-small">	
 					<button class="btn btn-warning" title="<?php echo $fileindex; ?>" type="button" onClick="javascript: window.location='<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>';">&hearts;</button>
+					<select class="span5 input-medium" name="fileselect" >
 					<?php foreach ($fileindex_a as $fi): ?>		
+  						<option value="<?php echo $fi;?>" onClick="javascript: window.location='<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fi; ?>';" <?php echo $filename == $fi ? 'selected' : '';?>><?php echo $fi;?></option>
+  						<!-- 
 						<button class="btn btn-info" type="button" onClick="javascript: window.location='<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fi; ?>';"><?php echo $fi; ?></button>
+					 	-->
 					<?php endforeach;?>
-				</div>
+  					</select>
+					</div>
 				<div class="navbar-form well well-small">Fichier :
 					
 					<input class="span5" size="50" type="text" name="filename"	id="filename" value="<?php echo $filename ?>" />
