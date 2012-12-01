@@ -1,4 +1,4 @@
 edf
 ===
 
-Editeur de fichier
+Editeur de fichier en PHP
