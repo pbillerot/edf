@@ -94,36 +94,39 @@ try
 <meta name="publisher" content="Eclipse-php sous Xubuntu" />
 <meta name="copyright" content="<?php echo constant("COPYRIGHT"); ?>" />
 <meta name="description" content="<?php echo constant("DESCRIPTION"); ?>" />
-<title><?php echo constant("COPYRIGHT"); ?></title>
+<title><?php echo constant("DESCRIPTION"); ?></title>
 <!-- Le styles -->
-<link href="bootstrap/css/boottheme.css" rel="stylesheet">
-<style>
-body {
-	padding-top: 60px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
-}
-.navbar {
-	width: 100%;
-}
-.container {
-	width: 100%;
-}
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
 </style>
+<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
 	<form name="maForm" method="POST">
 
-		<div class="navbar navbar-fixed-top">
+		<div id="header" class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<div class="container">
+				<div class="container-fluid">
 					<a class="btn btn-navbar" data-toggle="collapse"
-						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
-					</a> <a class="brand" href="#"><?php echo constant("DESCRIPTION"); ?></a>
-					<div class="nav-collapse collapse">
+						data-target=".nav-collapse"> 
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="#"><?php echo constant("DESCRIPTION"); ?></a>
+					<div class="nav-collapse navbar-responsive-collapse in collapse" style="heikght: auto;">
 						<ul class="nav">
-							<li class="active"><a href="#"><?php echo strtoupper($fileindex); ?></a></li>
-						</ul>
+							<li class="active"><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
+													<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
+													<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
+												</ul>
 					</div>
 				</div>
 			</div>
@@ -131,13 +134,15 @@ body {
 
 		<div class="container-fluid">
 			<div class="row-fluid">
-				<div class="span3 well well-small">
-					<ul class="nav nav-list">
+				<div class="span3">
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
 						<?php foreach ($fileindex_a as $fi): ?>
 						<li><a
 							href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fi; ?>"><?php echo $fi; ?></a></li>
 						<?php endforeach;?>
-					</ul>
+						</ul>
+					</div>
 				</div>
 				<div class="span9">
 					<div class="navbar-form well well-small">Fichier :
@@ -145,12 +150,6 @@ body {
 						<input class="span5" size="50" type="text" name="filename"	id="filename" value="<?php echo $filename ?>" />
 						<button class="btn" type="submit" name="ouvrir">Ouvrir</button>
 						<input class="span2" size="50" type="text" name="charset"id="charset" value="<?php echo $charset?>" disabled="disabled"/>
-						<!-- 
-						<select class="span2 input-medium" name="charset" >
-	  						<option value="ISO-8859-1" <?php echo $charset == 'ISO-8859-1' ? 'selected' : '';?>>ISO-8859-1</option>
-	  						<option value="UTF-8" <?php echo $charset == 'UTF-8' ? 'selected' : '';?>>UTF-8</option>
-	  					</select>
-	  					 -->
 						<?php if ( $isEnEdition ) :?>
 							<button class="btn btn-success" type="submit" name="enregistrer">Enregistrer</button>
 						<?php else :?>
