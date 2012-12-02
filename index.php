@@ -1,13 +1,47 @@
 <?php
 /*
- * Editeur De Fichiers PHP sur edf2
+ * Editeur De Fichiers PHP
+ * La liste des fichiers à éditer sera à saisir dans un fichier index
+ * Le fichier index par défaut est index.txt
+ */
+
+/*
+ * le nom du fichier à éditer
+ */
+$filename = "index.txt";
+
+/*
+ * Etat du fichier consultation/edition
+ * Le bouton "Editer" permet de passer en mode "edition"
+ * Le bouton "Enregistrer" va remettre le fichier en mode "consultation"
+ */
+$isEnEdition = false;
+
+/*
+ * Le contenu du fichier à éditer
  */
 $contents = "";
-$filename = "";
-$isEnEdition = false;
+
+/*
+ * L'encodage des caractères calculé automatiquement en fonction des caractères trouvés dans le fichier
+ * Ne gère que ISO-8859-1 (par défaut) ou UTF-8 
+ */
 $charset = 'ISO-8859-1';
+
+/*
+ * Nom du fichier dui contient la liste des fichiers à éditer
+ * La liuste sera présentée dans un menu
+ */
 $fileindex = 'index.txt';
+
+/*
+ * Tableau des fichiers à éditer
+ */
 $fileindex_a = array();
+
+/*
+ * constantes
+ */
 define("COPYRIGHT" , "&copy; La Toilerie du Poitou 2012");
 define("DESCRIPTION" , "Editeur de fichier");
 
@@ -98,19 +132,21 @@ try
 <!-- Le styles -->
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+    .sidebar-nav {
+	padding: 9px 0;
+}
+textarea {
+	margin-top: 5px;
+}
 </style>
 <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
 	<form name="maForm" method="POST">
-
 		<div id="header" class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
@@ -124,9 +160,9 @@ try
 					<div class="nav-collapse navbar-responsive-collapse in collapse" style="heikght: auto;">
 						<ul class="nav">
 							<li class="active"><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
-													<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
-													<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
-												</ul>
+							<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
+							<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fileindex; ?>"><?php echo strtoupper($fileindex); ?></a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -138,16 +174,14 @@ try
 					<div class="well sidebar-nav">
 						<ul class="nav nav-list">
 						<?php foreach ($fileindex_a as $fi): ?>
-						<li><a
-							href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fi; ?>"><?php echo $fi; ?></a></li>
+						<li><a href="<?php echo $_SERVER["PHP_SELF"].'?fileindex='.$fileindex.'&filename='.$fi.'&iu='.$iu; ?>"><?php echo $fi; ?></a></li>
 						<?php endforeach;?>
 						</ul>
 					</div>
 				</div>
 				<div class="span9">
-					<div class="navbar-form well well-small">Fichier :
-						
-						<input class="span5" size="50" type="text" name="filename"	id="filename" value="<?php echo $filename ?>" />
+					<div class="navbar-form well well-small">
+					Fichier : <input class="span5" size="50" type="text" name="filename" id="filename" value="<?php echo $filename ?>" />
 						<button class="btn" type="submit" name="ouvrir">Ouvrir</button>
 						<input class="span2" size="50" type="text" name="charset"id="charset" value="<?php echo $charset?>" disabled="disabled"/>
 						<?php if ( $isEnEdition ) :?>
@@ -168,13 +202,14 @@ try
 			<div class="footer">
 			<hr/>
 			<?php echo constant("COPYRIGHT"); ?> 
-			</div>
-			
+			</div>			
 		</div>
 		<!--/.fluid-container-->
 
 		<input type="hidden" name="fileindex"
 			value="<?php echo $fileindex; ?>" />
 	</form>
+	<script src="bootstrap/js/jquery.js"></script>
+	<script src="bootstrap/js/bootstrap.js"></script>
 </body>
 </html>
